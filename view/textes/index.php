@@ -3,8 +3,7 @@
 <div class="monOmbre">
 	<a href="<?= BASE_URL.'/textes/text_edit/' ?>" class="btn btn-lg btn-block btn-info"><strong>&Eacute;crire une nouvelle idée &nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span></strong></a>
 </div>
-<br/><hr/>
-
+<br>
 		<?php
 				// Utilisé pour le bouton précédent.
 				$_SESSION['pageActuelle'] = 1;
@@ -26,12 +25,12 @@
 		<!-- Index paginé -->
 		<?php foreach ($textes as $k => $v): ?>
 			<div class="jumbotron" onmouseover="this.style.backgroundColor='#EDF7FF';" onmouseout="this.style.backgroundColor='#EEE';">
-				<h2><center><span class="label label-primary">
+				<h2 class="text-right"><span class="label label-primary">
 					<?php
 						echo $v->utiTexte;
 						//echo "<img id='maphoto' src='".$_SESSION['Utilisateur']->profilPic."' alt='My face' height='50' width='56'>";
 					?>
-				</span></center></h2>
+				</span></h2>
 				<?php echo $v->leTexte; ?>
 				<?php
 				echo count($v->comments) ? count($v->comments) . ' commentaire(s)' : 'Pas de commentaire';

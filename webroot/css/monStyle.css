@@ -5,6 +5,9 @@ footer 				{ position: absolute; bottom: 0; left: 0; right: 0; }
 .navbar-brand.medium 	{ font-size: medium; }
 .bigger 				{ font-size: medium;}
 .jumbotron			{ box-shadow: 0px 0px 2px 0px; padding-top: 10px; padding-bottom: 40px; }
+.jumbotron img {
+  max-width: 100%;
+}
 /*
 .monOmbre				{ box-shadow: 0.5px 1px 5px 1px rgba(0, 0, 0, 0.7); }
 */
@@ -16,9 +19,9 @@ li.with-img a 			{ padding: 0; margin-top: 1px; }
 
 .descendu       { position: relative; margin-top: 10px; }
 
-#logo				{ 	position: relative; 
-						height: 75px; 
-						width: 130px; 
+#logo				{ 	position: relative;
+						height: 75px;
+						width: 130px;
 						top: -17px; left: 0px;
 					}
 
@@ -37,7 +40,7 @@ h1.texteOmbre			{ text-shadow: 0.5px 0.5px #FFF; }
   border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
-  
+
 }
 .spoiler-toggle {
   font-weight: bold;
@@ -49,3 +52,37 @@ h1.texteOmbre			{ text-shadow: 0.5px 0.5px #FFF; }
    cursor: default;
 }
 
+#rocket_dummy{
+position:absolute; left:-300px; top:20px;
+width:55px; height:55px;
+}
+#rocket_mobile{
+position:absolute; top:0; margin:85px 0 0 -4px;
+width:60px; height:185px;
+}
+#rocket_mobile.fixed{position:fixed; top:0;}
+
+#rocket_dock{
+position:absolute; width:28px; height:28px; top:164px; left:12px;
+background:url('<?= Router::webroot('js/rocket/rocket-spriteNew.png') ?>') 0 0 no-repeat;
+}
+
+#rocket_mobile .rocket_body{
+position:absolute; width:60px; height:60px; top:63px; left:0;
+background:url('<?= Router::webroot('js/rocket/rocket-spriteNew.png') ?>') 0 -28px no-repeat;
+}
+
+#rocket_mobile .fire{
+position:absolute; width:35px; height:78px;
+}
+#rocket_mobile .fire.top{
+left:13px; top:3px;
+background:url('<?= Router::webroot('js/rocket/rocket-spriteNew.png') ?>') -60px 0 no-repeat;
+}
+#rocket_mobile .fire.top.on{background-position:-95px 0;}
+#rocket_mobile .fire.bottom{
+left:13px; top:104px;
+background:url('<?= Router::webroot('js/rocket/rocket-spriteNew.png') ?>') -60px -78px no-repeat;
+}
+#rocket_mobile .fire.bottom.on{background-position:-95px -78px;}
+.rocket_body a { margin-top: 13px; margin-left: 10px;}

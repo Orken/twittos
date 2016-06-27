@@ -5,7 +5,7 @@ class TextesController extends Controller{
 		parent::__construct($request);
 		$this->loadModel('Texte');
 	}
-	
+
 	/**
 	 * Permet de selectionner les articles affichés par page
 	 */
@@ -21,12 +21,16 @@ class TextesController extends Controller{
 		)); //permet de changer les pages, on met -1 pour obtenir l'article avec l'ID = 0 en premier
 		$d['total'] = $this->Texte->findCount($condition);
 		$d['page'] = ceil($d['total'] / $perPage);
+		foreach ($d['textes'] as &$textes) {
+			$comments = $this->Texte->listeCommentaire($textes->id);
+			$textes->comments = $comments;
+		}
 		$this->set($d);
 	}
 
 
 	public function view($id) {
-		
+
 		$d['textes'] = $this->Texte->getById($id);
 		if(empty($d['textes'])){
 			$this->e404('Page introuvable');
@@ -36,7 +40,7 @@ class TextesController extends Controller{
 
 		// On a besoin d'envoyer à la vue les commentaires.
 		$this->set('comments', $comments);
-		
+
 		$this->set($d);
 	}
 
@@ -53,17 +57,17 @@ class TextesController extends Controller{
 		{
 			if(!empty($this->request->data->id))
 			{
-				
+
 				// On verifie que l'utilisateur voulant editer le message soit celui qui l'a écrit.
 				if($this->Texte->verifieProprio($this->request->data->id))
 				{
 					// Cette ligne va permettre de placer les balises iframe/embed lorsqu'on colle simplement une video
 					$this->request->data->leTexte = preg_replace('#https://www.youtube.com/watch\?v=([a-z0-9A-Z_-]+)+#i', '<center><iframe width="560" height="314" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe></center>', $this->request->data->leTexte);
-					
+
 					$this->Texte->save($this->request->data);
-					$id = $this->Texte->id;	
+					$id = $this->Texte->id;
 				}
-			
+
 			// On crée un nouveau message
 			}else
 			{
@@ -86,7 +90,7 @@ class TextesController extends Controller{
 			));
 			$d['id'] = $id;
 		}
-		$this->set($d);		
+		$this->set($d);
 	}
 
 
@@ -124,13 +128,13 @@ class TextesController extends Controller{
 	{
 		$this->Texte->delete_com($id_com);
 		$this->Session->setFlash('Votre commentaire a bien été supprimé','success');
-		$this->redirect('/textes/view/'.$_SESSION['idDuTexte']);	
+		$this->redirect('/textes/view/'.$_SESSION['idDuTexte']);
 	}
 
 
 	public function search()
 	{
-		
+
 	}
 
 	public function actionSearch() {
@@ -149,7 +153,7 @@ class TextesController extends Controller{
 	     }
 	}
 
-	
+
 
 
 }// END class TextesController

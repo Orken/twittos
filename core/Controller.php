@@ -17,7 +17,7 @@ class Controller{
 
 	/**
 	* Constructeur
-	* @param $request Objet request de notre application 
+	* @param $request Objet request de notre application
 	**/
 	function __construct($request = null){
 
@@ -29,7 +29,6 @@ class Controller{
 			$this->request = $request;
 			if (!$this->Session->isLogged() && !$this->isAuthorized()) {
 				require ROOT.DS.'config'.DS.'hook.php';
-
 			}
 		}
 	}
@@ -52,7 +51,7 @@ class Controller{
 		else{
 			$view = ROOT.DS.'view'.DS.$this->request->controller.DS.$view.'.php';
 		}
-		
+
 		if ( $this->render ) {
 			ob_start();
 			require($view);
@@ -74,7 +73,7 @@ class Controller{
 		}
 		else{
 			$this->vars[$key] = $value;
-		} 
+		}
 	}
 
 
@@ -90,7 +89,7 @@ class Controller{
 		require_once($file);
 		if(!isset($this->$name)){
 			$this->$name = new $name();
-		}		
+		}
 	}
 
 	/**
